@@ -12,9 +12,18 @@ Aplicación Android desarrollada para el registro y seguimiento de incidencias.
 
 ## Estado actual
 
-Actualmente, la aplicación cuenta con una interfaz inicial para el registro de incidencias. La pantalla permite ingresar el título y la descripción de una incidencia y muestra el botón para registrarla.
+Actualmente, la aplicación cuenta con una interfaz para el registro de incidencias. La pantalla permite ingresar el título y la descripción de una incidencia mediante campos de texto.
 
-La funcionalidad completa para registrar y almacenar las incidencias aún no ha sido implementada.
+Se implementó estado básico con remember y mutableStateOf para conservar la información ingresada por el usuario. Al presionar el botón "Registrar Incidencia", la aplicación muestra una retroalimentación visible con el título del reporte preparado.
+
+La funcionalidad para almacenar las incidencias en una base de datos aún no ha sido implementada.
+
+
+## Avance Semana 6
+
+Se incorporó interacción básica y manejo de estado en la interfaz utilizando remember y mutableStateOf. Los campos permiten ingresar y conservar el título y la descripción de la incidencia.
+
+El botón "Registrar Incidencia" actualiza el estado de la aplicación y muestra una retroalimentación visible con el título del reporte preparado. La funcionalidad fue comprobada mediante la ejecución de la aplicación en un dispositivo físico.
 
 ## Cómo abrir el proyecto
 
