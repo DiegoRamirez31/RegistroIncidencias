@@ -50,6 +50,10 @@ fun RegistroIncidenciasApp() {
         mutableStateOf("")
     }
 
+    var mensaje by remember {
+        mutableStateOf(  "Aun no hay reporte Creado")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +107,9 @@ fun RegistroIncidenciasApp() {
         )
 
         Button(
-            onClick = { /* Se implementará en una unidad posterior */ }
+            onClick = {
+                mensaje = "Reporte Preparado: $titulo"
+            }
         ) {
             Text(
                 text = "Registrar Incidencia"
@@ -122,7 +128,7 @@ fun RegistroIncidenciasApp() {
                 )
 
                 Text(
-                    text = "Ninguna incidencia ha sido registrada."
+                    text = mensaje
                 )
             }
         }
