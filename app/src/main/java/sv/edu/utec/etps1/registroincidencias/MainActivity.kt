@@ -1,5 +1,6 @@
 package sv.edu.utec.etps1.registroincidencias
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,6 +26,8 @@ import sv.edu.utec.etps1.registroincidencias.ui.theme.RegistroIncidenciasTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +55,10 @@ fun RegistroIncidenciasApp() {
 
     var mensaje by remember {
         mutableStateOf(  "Aun no hay reporte Creado")
+    }
+
+    var esError by remember {
+        mutableStateOf(false)
     }
 
     Column(
@@ -108,7 +115,13 @@ fun RegistroIncidenciasApp() {
 
         Button(
             onClick = {
-                mensaje = "Reporte Preparado: $titulo"
+                if( titulo.isBlank() || descripcion.isBlank() ){
+                    mensaje = "Completa los campos"
+                    esError = true
+                }else{
+                    mensaje = "Reporte Preparado: $titulo"
+                    esError = false
+                }
             }
         ) {
             Text(
@@ -128,7 +141,9 @@ fun RegistroIncidenciasApp() {
                 )
 
                 Text(
-                    text = mensaje
+                    text = mensaje,
+                    color = if(esError) Color.Red else Color.Unspecified,
+                    fontWeight = if ( esError ) FontWeight.Bold else FontWeight.Normal
                 )
             }
         }
