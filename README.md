@@ -25,6 +25,14 @@ Se incorporó interacción básica y manejo de estado en la interfaz utilizando 
 
 El botón "Registrar Incidencia" actualiza el estado de la aplicación y muestra una retroalimentación visible con el título del reporte preparado. La funcionalidad fue comprobada mediante la ejecución de la aplicación en un dispositivo físico.
 
+## Avance Semana 7
+
+Se incorporó validación básica en el formulario de registro de incidencias. Al presionar el botón "Registrar Incidencia", la aplicación verifica que los campos de título y descripción contengan información.
+
+Si alguno de los campos está vacío, se muestra el mensaje "Completa los campos" en color rojo y negrita para orientar al usuario. Cuando ambos campos contienen información, la aplicación muestra la retroalimentación correspondiente con el título del reporte preparado.
+
+La validación fue comprobada mediante la ejecución de la aplicación en un dispositivo Android físico.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
