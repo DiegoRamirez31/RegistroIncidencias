@@ -33,6 +33,14 @@ Si alguno de los campos está vacío, se muestra el mensaje "Completa los campos
 
 La validación fue comprobada mediante la ejecución de la aplicación en un dispositivo Android físico.
 
+## Avance Semana 10
+
+Se incorporó manejo contextual del teclado en el campo de título mediante KeyboardOptions, utilizando capitalización de oraciones y la acción IME Next.
+
+También se agregó una interacción táctil para seleccionar la prioridad de la incidencia. Al tocar la opción correspondiente, la prioridad cambia entre Baja, Media y Alta.
+
+La prioridad seleccionada se incorpora al mensaje de retroalimentación cuando el reporte es preparado. La funcionalidad fue comprobada mediante la ejecución de la aplicación en un dispositivo físico.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
