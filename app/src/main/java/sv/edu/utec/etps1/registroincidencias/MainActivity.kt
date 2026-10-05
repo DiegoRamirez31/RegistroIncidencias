@@ -28,6 +28,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.foundation.clickable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,6 +65,10 @@ fun RegistroIncidenciasApp() {
         mutableStateOf(false)
     }
 
+    var prioridad by remember {
+        mutableStateOf("Media")
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -91,6 +99,10 @@ fun RegistroIncidenciasApp() {
                     text = "Título de la incidencia"
                 )
             },
+            keyboardOptions = KeyboardOptions(
+                capitalization = KeyboardCapitalization.Sentences,
+                imeAction = ImeAction.Next
+            ),
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -109,6 +121,26 @@ fun RegistroIncidenciasApp() {
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = "Prioridad: $prioridad",
+            fontWeight = FontWeight.Bold
+        )
+
+        Text(
+            text = "Toca aquí para cambiar la prioridad",
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .clickable {
+                    prioridad = when (prioridad) {
+                        "Baja" -> "Media"
+                        "Media" -> "Alta"
+                        else -> "Baja"
+                    }
+                }
+        )
+
         Spacer(
             modifier = Modifier.height(24.dp)
         )
@@ -119,7 +151,7 @@ fun RegistroIncidenciasApp() {
                     mensaje = "Completa los campos"
                     esError = true
                 }else{
-                    mensaje = "Reporte Preparado: $titulo"
+                    mensaje = "Reporte Preparado: $titulo - Prioridad: $prioridad"
                     esError = false
                 }
             }
