@@ -1,6 +1,6 @@
 package sv.edu.utec.etps1.registroincidencias
 
-import android.R
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,6 +32,13 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.foundation.clickable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
+import androidx.compose.ui.platform.LocalContext
+import android.content.Context
+import androidx.compose.runtime.DisposableEffect
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +53,44 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun RegistroIncidenciasApp() {
+    val context = LocalContext.current
+
+    val sensorManager = remember {
+        context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    }
+
+    val accelerometer = remember {
+        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+    }
+
+    var ejeX by remember { mutableStateOf(0f) }
+    var ejeY by remember { mutableStateOf(0f) }
+    var ejeZ by remember { mutableStateOf(0f) }
+
+    DisposableEffect(accelerometer) {
+        var listener = object : SensorEventListener{
+            override fun onSensorChanged(event: SensorEvent) {
+                ejeX = event.values[0]
+                ejeY = event.values[1]
+                ejeZ = event.values[2]
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+            }
+        }
+
+        if (accelerometer != null) {
+            sensorManager.registerListener(
+                listener,
+                accelerometer,
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        }
+        onDispose {
+            sensorManager.unregisterListener(listener)
+        }
+    }
 
     // Se utiliza para reemplazar el texto mostrado por el nuevo
     // Digitado por el usuario
@@ -140,6 +185,24 @@ fun RegistroIncidenciasApp() {
                     }
                 }
         )
+
+        Text(
+            text = "Sensor de movimiento",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+
+        Text(
+            text = if (accelerometer != null) {
+                "Acelerómetro activo"
+            } else {
+                "Acelerómetro no disponible"
+            }
+        )
+
+        Text(text = "X: $ejeX")
+        Text(text = "Y: $ejeY")
+        Text(text = "Z: $ejeZ")
 
         Spacer(
             modifier = Modifier.height(24.dp)
