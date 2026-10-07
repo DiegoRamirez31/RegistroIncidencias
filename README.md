@@ -41,6 +41,18 @@ También se agregó una interacción táctil para seleccionar la prioridad de la
 
 La prioridad seleccionada se incorpora al mensaje de retroalimentación cuando el reporte es preparado. La funcionalidad fue comprobada mediante la ejecución de la aplicación en un dispositivo físico.
 
+## Avance Semana 11 - Integración de sensor
+
+Se integró el acelerómetro del dispositivo al proyecto RegistroIncidencias.
+
+La aplicación obtiene y muestra en pantalla los valores de movimiento correspondientes a los ejes X, Y y Z.
+
+También se agregó una validación para indicar si el acelerómetro está disponible en el dispositivo.
+
+La lectura del sensor fue probada en un dispositivo físico Samsung SM-G781U1, verificando que los valores X, Y y Z cambian al mover o inclinar el teléfono.
+
+Para controlar el uso del sensor se utiliza DisposableEffect, registrando el SensorEventListener mientras se utiliza la pantalla y liberándolo mediante onDispose.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
