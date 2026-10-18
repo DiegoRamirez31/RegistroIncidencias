@@ -39,6 +39,7 @@ import android.hardware.SensorManager
 import androidx.compose.ui.platform.LocalContext
 import android.content.Context
 import androidx.compose.runtime.DisposableEffect
+import kotlin.math.sqrt
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,12 +68,28 @@ fun RegistroIncidenciasApp() {
     var ejeY by remember { mutableStateOf(0f) }
     var ejeZ by remember { mutableStateOf(0f) }
 
+    var estadoMovimiento by remember { mutableStateOf("Dispositivo estable") }
+    var ultimoMovimiento by remember { mutableStateOf(0L) }
+
     DisposableEffect(accelerometer) {
         var listener = object : SensorEventListener{
             override fun onSensorChanged(event: SensorEvent) {
                 ejeX = event.values[0]
                 ejeY = event.values[1]
                 ejeZ = event.values[2]
+
+                val magnitud = sqrt(
+                    (ejeX * ejeX + ejeY * ejeY + ejeZ * ejeZ).toDouble()
+                ).toFloat()
+
+                val ahora = System.currentTimeMillis()
+
+                if (magnitud > 12f) {
+                    ultimoMovimiento = ahora
+                    estadoMovimiento = "Movimiento detectado"
+                } else if (ahora - ultimoMovimiento > 1500) {
+                    estadoMovimiento = "Dispositivo estable"
+                }
             }
 
             override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
@@ -187,10 +204,15 @@ fun RegistroIncidenciasApp() {
         )
 
         Text(
-            text = "Sensor de movimiento",
+            text = "Diagnóstico del dispositivo",
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(top = 16.dp)
         )
+        /*Text(
+            text = "Sensor de movimiento",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 16.dp)
+        )*/
 
         Text(
             text = if (accelerometer != null) {
@@ -203,6 +225,13 @@ fun RegistroIncidenciasApp() {
         Text(text = "X: $ejeX")
         Text(text = "Y: $ejeY")
         Text(text = "Z: $ejeZ")
+
+
+        Text(
+            text = "Estado: $estadoMovimiento",
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(top = 8.dp)
+        )
 
         Spacer(
             modifier = Modifier.height(24.dp)
