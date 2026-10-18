@@ -53,6 +53,23 @@ La lectura del sensor fue probada en un dispositivo físico Samsung SM-G781U1, v
 
 Para controlar el uso del sensor se utiliza DisposableEffect, registrando el SensorEventListener mientras se utiliza la pantalla y liberándolo mediante onDispose.
 
+## Avance Semana 12 - Diagnóstico del dispositivo
+
+Se agregó una sección de diagnóstico del dispositivo utilizando el acelerómetro.
+
+La aplicación sigue mostrando los valores X, Y y Z, pero ahora también interpreta esos datos y muestra un estado visible:
+
+- Dispositivo estable
+- Movimiento detectado
+
+Para evitar que pequeñas variaciones del sensor cambien constantemente el mensaje, se utiliza un umbral de movimiento.
+
+Cuando se detecta un movimiento fuerte, el mensaje permanece visible durante aproximadamente 1.5 segundos para que pueda leerse correctamente.
+
+La prueba se realizó en un dispositivo físico Samsung.
+
+Como limitación, los valores del acelerómetro pueden variar ligeramente aunque el teléfono esté quieto debido a la sensibilidad natural del sensor.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
