@@ -41,6 +41,7 @@ import android.content.Context
 import androidx.compose.runtime.DisposableEffect
 import kotlin.math.sqrt
 import android.util.Log
+import androidx.compose.runtime.saveable.rememberSaveable
 
 class MainActivity : ComponentActivity() {
     private val tag = "REGISTRO_LIFECYCLE"
@@ -141,7 +142,10 @@ fun RegistroIncidenciasApp() {
 
     // Se utiliza para reemplazar el texto mostrado por el nuevo
     // Digitado por el usuario
-    var titulo by remember {
+    /*var titulo by remember {
+        mutableStateOf("")
+    }*/
+    var titulo by rememberSaveable {
         mutableStateOf("")
     }
 
