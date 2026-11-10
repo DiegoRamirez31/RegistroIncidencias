@@ -70,6 +70,16 @@ La prueba se realizó en un dispositivo físico Samsung.
 
 Como limitación, los valores del acelerómetro pueden variar ligeramente aunque el teléfono esté quieto debido a la sensibilidad natural del sensor.
 
+## Avance Semana 15 - Conservación del estado
+
+En esta práctica se comparó el comportamiento de remember y rememberSaveable en el campo Título de RegistroIncidencias.
+
+Primero se utilizó remember. Se escribió el texto "Falla de red" y al rotar el dispositivo el contenido se perdió.
+
+Luego se cambió a rememberSaveable. Se repitió la misma prueba y, después de rotar el teléfono, el texto se conservó correctamente.
+
+Con esto se comprobó que remember mantiene el estado durante recomposiciones, mientras que rememberSaveable permite restaurar datos simples de la interfaz cuando la Activity es recreada.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
