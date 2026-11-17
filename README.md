@@ -80,6 +80,16 @@ Luego se cambió a rememberSaveable. Se repitió la misma prueba y, después de 
 
 Con esto se comprobó que remember mantiene el estado durante recomposiciones, mientras que rememberSaveable permite restaurar datos simples de la interfaz cuando la Activity es recreada.
 
+## Avance Semana 16 - Estado de pantalla con ViewModel
+
+Se agregó un IncidenciaViewModel para separar parte del estado de la interfaz.
+
+Los datos Título y Prioridad ahora son administrados desde el ViewModel. La pantalla muestra esos valores y envía eventos cuando el usuario escribe o cambia la prioridad.
+
+Se realizó una prueba en el dispositivo físico escribiendo "Falla de red" y seleccionando prioridad Alta. Después de rotar el teléfono, ambos valores se conservaron.
+
+Con esta práctica se comprobó que un ViewModel permite mantener estado de pantalla durante cambios de configuración y ayuda a separar los datos y eventos de la interfaz.
+
 ## Cómo abrir el proyecto
 
 1. Descargar o clonar el repositorio.
